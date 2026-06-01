@@ -984,3 +984,259 @@ header.header-scrolled {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+/* ============================================================
+   Testimonials: responsive grid, interactive accents
+   ============================================================ */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 28px;
+}
+
+.testimonial-card {
+  background: linear-gradient(180deg, rgba(12,21,43,0.6), rgba(3,7,18,0.6));
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 30px rgba(2,8,20,0.6);
+  border: 1px solid rgba(212,175,55,0.06);
+  transition: transform 300ms cubic-bezier(.2,.9,.2,1), box-shadow 300ms ease, border-color 300ms ease;
+  overflow: hidden;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 30px 70px rgba(2,8,20,0.7), 0 0 30px rgba(212,175,55,0.06);
+  border-color: rgba(212,175,55,0.18);
+}
+
+.testimonial-video-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.1));
+}
+
+.testimonial-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #000;
+}
+
+.testimonial-caption {
+  margin-top: 12px;
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* Accent underline that animates on hover */
+.testimonial-caption::after {
+  content: '';
+  display: block;
+  height: 4px;
+  width: 36px;
+  margin-top: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), #38BDF8);
+  transform-origin: left center;
+  transition: transform 350ms cubic-bezier(.2,.9,.2,1), opacity 250ms ease;
+  opacity: 0.9;
+}
+
+.testimonial-card:hover .testimonial-caption::after {
+  transform: scaleX(1.6);
+  opacity: 1;
+}
+
+@media (max-width: 980px) {
+  .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .testimonials-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   Testimonials hero / premium header visuals
+   - Only visual changes: large gradient heading, badge, glow,
+     orbs, particles and subtle glass behind content.
+   ============================================================ */
+.testimonials-hero-orbs,
+.testimonials-hero-streaks {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+}
+
+.testimonials-hero-orbs::before,
+.testimonials-hero-orbs::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.9;
+}
+
+.testimonials-hero-orbs::before {
+  width: 560px; height: 560px;
+  left: -8%; top: -10%;
+  background: radial-gradient(circle at 30% 30%, rgba(37,99,235,0.18), transparent 30%);
+  animation: orb-move-1 18s ease-in-out infinite;
+}
+
+.testimonials-hero-orbs::after {
+  width: 480px; height: 480px;
+  right: -6%; bottom: -8%;
+  background: radial-gradient(circle at 70% 70%, rgba(124,58,174,0.14), transparent 30%);
+  animation: orb-move-2 22s ease-in-out infinite;
+}
+
+@keyframes orb-move-1 {
+  0% { transform: translateY(0) translateX(0) scale(1); }
+  50% { transform: translateY(3%) translateX(2%) scale(1.05); }
+  100% { transform: translateY(0) translateX(0) scale(1); }
+}
+
+@keyframes orb-move-2 {
+  0% { transform: translateY(0) translateX(0) scale(1); }
+  50% { transform: translateY(-3%) translateX(-2%) scale(1.03); }
+  100% { transform: translateY(0) translateX(0) scale(1); }
+}
+
+/* streaks / particles layer */
+.testimonials-hero-streaks::before {
+  content: '';
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 40%;
+  background: linear-gradient(90deg, rgba(6,182,212,0.06), rgba(249,115,22,0.04));
+  filter: blur(30px) saturate(1.1);
+  transform: rotate(-6deg);
+  animation: streak-move 20s linear infinite;
+}
+
+@keyframes streak-move { 0% { transform: translateX(-2%) rotate(-6deg); } 100% { transform: translateX(2%) rotate(-6deg); } }
+
+/* subtle moving particle dots using repeating-radial-gradient */
+.testimonials-hero-streaks::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 2px);
+  background-size: 16px 16px;
+  opacity: 0.35;
+  mix-blend-mode: screen;
+  animation: particles-drift 28s linear infinite;
+}
+
+@keyframes particles-drift { 0% { background-position: 0 0; } 100% { background-position: 200px 120px; } }
+
+/* Hero heading styles (applied on Testimonials page only) */
+.page h1 {
+  margin-top: 8px;
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #2563EB, #06B6D4, #7C3AED, #F97316);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 6px 30px rgba(37,99,235,0.12), 0 2px 12px rgba(124,58,174,0.08);
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: hero-fade-up 700ms ease forwards 120ms;
+}
+
+/* glowing highlight behind heading */
+.page h1::after {
+  content: '';
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  bottom: -18px;
+  width: min(720px, 80%);
+  height: 140px;
+  background: radial-gradient(ellipse at center, rgba(249,115,22,0.12), transparent 40%);
+  filter: blur(40px);
+  z-index: -1;
+  opacity: 0.95;
+}
+
+@keyframes hero-fade-up { to { opacity: 1; transform: translateY(0); } }
+
+body.gallery-page h1,
+body.gallery-page .page h1 {
+  margin-top: 8px;
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #2563EB, #06B6D4, #7C3AED, #F97316);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 6px 30px rgba(37,99,235,0.12), 0 2px 12px rgba(124,58,174,0.08);
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: hero-fade-up 700ms ease forwards 120ms;
+}
+
+body.gallery-page h1::after,
+body.gallery-page .page h1::after {
+  content: '';
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  bottom: -18px;
+  width: min(720px, 80%);
+  height: 140px;
+  background: radial-gradient(ellipse at center, rgba(249,115,22,0.12), transparent 40%);
+  filter: blur(40px);
+  z-index: -1;
+  opacity: 0.95;
+}
+
+body.gallery-page p,
+body.gallery-page .page p,
+.page p {
+  margin-top: 18px;
+  font-size: 1.06rem;
+  color: rgba(255,255,255,0.92);
+  max-width: 900px;
+  line-height: 1.9;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: hero-fade-up 700ms ease forwards 240ms;
+}
+
+/* glassmorphism strip behind hero content */
+.testimonials-hero-glass {
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  top: 60px;
+  width: min(1200px, 92%);
+  height: 220px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border-radius: 18px;
+  backdrop-filter: blur(10px) saturate(1.1);
+  box-shadow: 0 30px 60px rgba(2,8,20,0.55);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Slightly lift the page content area to reveal the hero glass */
+.page { position: relative; padding-top: 36px; }
+
+/* Gallery page color grading variant */
+.gallery-page { background: linear-gradient(135deg, #2563EB 0%, #06B6D4 35%, #7C3AED 65%, #F97316 100%); }
+.gallery-page .page h1,
+body.gallery-page h1 { background: linear-gradient(90deg, #38BDF8, #60A5FA, #7C3AED); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+

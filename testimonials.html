@@ -4,12 +4,75 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Testimonials — SparkleBots Internship</title>
-  <style>body{font-family:Inter,system-ui;padding:40px;background:#031222;color:#fff}a{color:#ffd27a}</style>
+  <link rel="stylesheet" href="assets/shared.css">
+  <style>
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 28px; }
+    .testimonial-card { background: rgba(255,255,255,0.04); border-radius: 16px; padding: 16px; }
+    .testimonial-video { width: 100%; height: auto; border-radius: 12px; display:block; }
+    .testimonial-caption { margin: 12px 0 0; color: rgba(255,255,255,0.9); font-weight:700 }
+    @media (max-width: 980px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .testimonials-grid { grid-template-columns: 1fr; } }
+  </style>
 </head>
-<body>
-  <div class="sparklebots-logo" style="margin-bottom:24px; display:flex; align-items:center;"><a href="index.html"><img src="public/logo.jpg" alt="SparkleBots logo" style="height:52px; display:block;" /></a></div>
-  <a href="index.html">← Back to Home</a>
-  <h1>Testimonials</h1>
-  <p>Student feedback and success stories.</p>
+<body class="testimonials-page">
+  <header style="padding:18px 0 6px;">
+    <div class="sparklebots-logo" style="margin-bottom:6px; display:flex; align-items:center;"><a href="index.html"><img src="public/logo.jpg" alt="Sparkel logo" style="height:52px; display:block;" /></a></div>
+  </header>
+  <main class="page">
+    <a href="index.html">← Back to Home</a>
+    <h1>Testimonials</h1>
+    <p>Student feedback and success stories.</p>
+
+    <!-- Decorative hero layers (purely visual) -->
+    <div class="testimonials-hero-orbs"></div>
+    <div class="testimonials-hero-streaks"></div>
+    <div class="testimonials-hero-glass" aria-hidden="true"></div>
+
+    <section class="section-inner">
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-video-wrapper">
+            <video class="testimonial-video" controls preload="metadata">
+              <source src="Testimonial 1.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="testimonial-caption">Young Builder Robotics Review</div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-video-wrapper">
+            <video class="testimonial-video" controls preload="metadata">
+              <source src="Testimonial 2.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="testimonial-caption">Future Innovator STEM Journey</div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-video-wrapper">
+            <video class="testimonial-video" controls preload="metadata">
+              <source src="Testimonial 3.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="testimonial-caption">Robotics Workshop Story</div>
+        </div>
+
+        <!-- show only first 4 videos on Testimonials page -->
+        <div class="testimonial-card">
+          <div class="testimonial-video-wrapper">
+            <video class="testimonial-video" controls preload="metadata">
+              <source src="WhatsApp Video 9.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="testimonial-caption">Classroom Project Showcase</div>
+        </div>
+
+      </div>
+    </section>
+  </main>
 </body>
 </html>

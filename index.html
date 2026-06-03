@@ -719,14 +719,14 @@
 
         // Mobile hamburger
         var hamburger = document.querySelector('.hamburger');
-        var navLinks = document.querySelector('.nav-links');
+        var navLinksContainer = document.querySelector('.nav-links');
         if (hamburger) {
           hamburger.addEventListener('click', function (e) {
             e.stopPropagation();
             var isOpen = document.body.classList.toggle('mobile-menu-open');
             hamburger.setAttribute('aria-expanded', isOpen.toString());
             hamburger.classList.toggle('open', isOpen);
-            if (navLinks) navLinks.classList.toggle('open-mobile', isOpen);
+            if (navLinksContainer) navLinksContainer.classList.toggle('open-mobile', isOpen);
           });
 
           // Close menu when a link is clicked
@@ -735,7 +735,7 @@
               document.body.classList.remove('mobile-menu-open');
               hamburger.setAttribute('aria-expanded', 'false');
               hamburger.classList.remove('open');
-              if (navLinks) navLinks.classList.remove('open-mobile');
+              if (navLinksContainer) navLinksContainer.classList.remove('open-mobile');
             });
           });
         }
@@ -769,7 +769,7 @@
                   hamburger.setAttribute('aria-expanded', 'false');
                   hamburger.classList.remove('open');
                 }
-                if (navLinks) navLinks.classList.remove('open-mobile');
+                if (navLinksContainer) navLinksContainer.classList.remove('open-mobile');
               }
             }
           });

@@ -61,6 +61,8 @@
       /* larger logo in navbar */
       .brand img { height:56px; transition: height 0.3s ease; }
       .nav-links { display:flex; align-items:center; gap:24px; position:relative }
+      /* when opened on mobile we force visible with this helper */
+      .nav-links.open-mobile { display:flex !important; }
       .nav-links a, .nav-links button { color:#fff; font-size:0.95rem; font-weight:600; transition: color 0.2s ease; }
       .nav-links a:hover { color: #D4AF37; }
 
@@ -306,7 +308,7 @@
     <header>
       <div class="page nav-wrap">
         <a class="brand" href="#top">
-          <img src="public/logo.jpg" alt="Sparkel logo" />
+          <img src="Sparkle logo.jpg" alt="Sparkel logo" />
         </a>
         <button class="hamburger" aria-label="Open menu" aria-expanded="false">
           <span class="bar"></span>
@@ -670,7 +672,7 @@
     <footer class="page">
       <div class="footer-inner">
         <div>
-          <img src="public/logo.jpg" alt="Sparkel logo" style="height:42px; margin-bottom:18px;" />
+          <img src="Sparkle logo.jpg" alt="Sparkel logo" style="height:42px; margin-bottom:18px;" />
           <p style="max-width:320px; color:var(--text-muted);">Designed to give interns a polished, career-focused experience with modern visuals and a strong professional feel.</p>
         </div>
         <div>
@@ -712,28 +714,34 @@
 
         // Mobile hamburger
         var hamburger = document.querySelector('.hamburger');
+        var navLinks = document.querySelector('.nav-links');
         if (hamburger) {
           hamburger.addEventListener('click', function (e) {
             e.stopPropagation();
-            var open = document.body.classList.toggle('mobile-menu-open');
-            hamburger.setAttribute('aria-expanded', open.toString());
+            var isOpen = document.body.classList.toggle('mobile-menu-open');
+            hamburger.setAttribute('aria-expanded', isOpen.toString());
+            if (navLinks) navLinks.classList.toggle('open-mobile', isOpen);
           });
-          
+
           // Close menu when a link is clicked
           document.querySelectorAll('.nav-links a').forEach(function (link) {
             link.addEventListener('click', function () {
               document.body.classList.remove('mobile-menu-open');
               hamburger.setAttribute('aria-expanded', 'false');
+              if (navLinks) navLinks.classList.remove('open-mobile');
             });
           });
         }
 
-        // Close menu when clicking outside
+        // Close menu when clicking outside (only when open)
         document.addEventListener('click', function (e) {
-          var navLinks = document.querySelector('.nav-links');
-          if (navLinks && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-            document.body.classList.remove('mobile-menu-open');
-            if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+          var navLinksEl = document.querySelector('.nav-links');
+          if (document.body.classList.contains('mobile-menu-open')) {
+            if (navLinksEl && !navLinksEl.contains(e.target) && !hamburger.contains(e.target)) {
+              document.body.classList.remove('mobile-menu-open');
+              if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+              if (navLinksEl) navLinksEl.classList.remove('open-mobile');
+            }
           }
         });
 

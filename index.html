@@ -174,10 +174,14 @@
         .nav-links { display:none }
         .hamburger { display:block }
         .nav-links.open-mobile { display:flex !important; position:fixed; inset:70px 0 0 0; width:100%; background: linear-gradient(135deg, rgba(2,5,13,0.99) 0%, rgba(12,21,43,0.95) 100%); border-radius:0; flex-direction:column; padding:12px 0; gap:0; overflow-y:auto; max-height:calc(100vh - 70px); z-index:130; backdrop-filter: blur(20px); }
+        body.mobile-menu-open {
+          overflow:hidden;
+        }
         body.mobile-menu-open .nav-links { 
-          display:flex; 
+          display:flex !important; 
           position:fixed; 
           inset:70px 0 0 0; 
+          width:100%;
           background: linear-gradient(135deg, rgba(2,5,13,0.99) 0%, rgba(12,21,43,0.95) 100%);
           border-radius:0;
           flex-direction:column; 
@@ -187,16 +191,20 @@
           max-height:calc(100vh - 70px); 
           z-index:130;
           backdrop-filter: blur(20px);
+          opacity:1;
+          visibility:visible;
         }
-        body.mobile-menu-open .nav-links a { 
+        body.mobile-menu-open .nav-links a,
+        body.mobile-menu-open .nav-links .dropdown-toggle {
           display:block;
+          width:100%;
           padding:16px 20px;
           font-size:1.05rem; 
           border-bottom: 1px solid rgba(212,175,55,0.1);
           transition: all 0.2s ease;
           min-height: 48px;
-          display: flex;
           align-items: center;
+          justify-content: space-between;
         }
         body.mobile-menu-open .nav-links a:hover, body.mobile-menu-open .nav-links a:active { 
           background: rgba(212,175,55,0.12);
@@ -236,6 +244,16 @@
           padding-right: 20px;
           padding-top: 14px;
           padding-bottom: 14px;
+        }
+        .mobile-actions {
+          display:flex;
+          flex-direction:column;
+          gap:14px;
+          padding: 20px 20px 24px;
+        }
+        .mobile-nav-button {
+          width:100%;
+          justify-content:center;
         }
         .hero-stats, .card-grid, .testimonials-grid, .gallery-grid, .footer-inner, .banner, .contact-grid { grid-template-columns:1fr }
         .banner { margin:0 }
@@ -348,6 +366,11 @@
           </div>
 
           <a href="contact.html">Contact</a>
+
+          <div class="mobile-actions">
+            <a class="button button-secondary mobile-nav-button" href="#programs">Explore</a>
+            <a class="button button-primary mobile-nav-button" href="registration.html">Apply Now</a>
+          </div>
         </nav>
         <div class="actions">
           <a class="button button-secondary" href="#programs">Explore</a>
